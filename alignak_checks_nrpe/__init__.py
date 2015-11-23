@@ -20,4 +20,4 @@ __author__ = u"Frédéric MOHIER"
 __author_email__ = "frederic.mohier@gmail.com"
 __copyright__ = u"(c) 2015 - %s" % __author__
 __license__ = u"GNU Affero General Public License, version 3"
-__url__ = u"https://github.com/Alignak-monitoring-contrib/alignak-checks-snmp"
+__url__ = u"https://github.com/Alignak-monitoring-contrib/alignak-checks-nrpe"
