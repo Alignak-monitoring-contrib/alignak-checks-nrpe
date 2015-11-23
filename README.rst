@@ -33,9 +33,9 @@ Documentation
 Configuration
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-**Note**: this pack embeds the `check_nrpe` binary from the Nagios plugins, this to avoid to have a complete Nagios installation on your Alignak server!
+**Note**: this pack embeds the ``check_nrpe`` binary from the Nagios plugins, this to avoid to have a complete Nagios installation on your Alignak server!
 
-If you wish to use the Nagios `check_nrpe` plugin, you must install from your system repository:
+If you wish to use the Nagios ``check_nrpe`` plugin, you must install from your system repository:
 ::
    # Install local NRPE plugin
    apt-get install nagios-nrpe-plugin
@@ -68,9 +68,9 @@ Test remote access with the plugins files:
 Alignak configuration
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-You simply have to tag the concerned hosts with the template `linux-nrpe`.
+You simply have to tag the concerned hosts with the template ``linux-nrpe``.
 
-The main `linux-nrpe` template only declares the default NRPE commands configured on the server. You can easily adapt the configuration defined in the `services.cfg` and `commands.cfg.parse` files.
+The main ``linux-nrpe`` template only declares the default NRPE commands configured on the server. You can easily adapt the configuration defined in the ``services.cfg`` and ``commands.cfg.parse`` files.
 
 
 Bugs, issues and contributing
