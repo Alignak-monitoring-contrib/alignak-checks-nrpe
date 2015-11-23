@@ -35,7 +35,7 @@ Configuration
 
 **Note**: this pack embeds the ``check_nrpe`` binary from the Nagios plugins, this to avoid to have a complete Nagios installation on your Alignak server!
 
-The embedded version of `` check_nrpe`` is only compatible with Linux distros. For Unix (FreeBSD), you can simply install the NRPE plugin:
+The embedded version of ``check_nrpe`` is only compatible with Linux distros. For Unix (FreeBSD), you can simply install the NRPE plugin:
 ::
    # Simple NRPE
    pkg install nrpe
