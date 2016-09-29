@@ -33,6 +33,7 @@ Configuration
 
 The embedded version of ``check_nrpe`` is only compatible with Linux distros. For Unix (FreeBSD), you can simply install the NRPE plugin:
 ::
+
    # Simple NRPE
    pkg install nrpe
 
@@ -41,9 +42,24 @@ The embedded version of ``check_nrpe`` is only compatible with Linux distros. Fo
 
 If you wish to use the Nagios ``check_nrpe`` plugin, you must install from your system repository:
 ::
+
    # Install local NRPE plugin
    apt-get install nagios-nrpe-plugin
    # Note: This may install all the Nagios stuff on your machine...
+
+
+After installation, the plugins are commonly installed in the */usr/local/libexec/nagios* directory.
+
+The */usr/local/etc/alignak/arbiter/packs/resource.d/nrpe.cfg* file defines a global macro
+that contains the NRPE check plugin installation path. If you do not want to use the installed
+plugin (eg. use the Nagios one...), edit this file to update the path
+::
+
+    #-- NRPE check plugin installation directory
+    # Default is to use the Alignak plugins directory
+    $NRPE_PLUGINS_DIR$=$PLUGINS_DIR$
+    #--
+
 
 
 Prepare monitored hosts
