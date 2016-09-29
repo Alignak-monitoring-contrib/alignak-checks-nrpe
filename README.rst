@@ -77,6 +77,15 @@ Alignak configuration
 ~~~~~~~~~~~~~~~~~~~~~
 
 You simply have to tag the concerned hosts with the template ``linux-nrpe``.
+::
+
+    define host{
+        use                     linux-nrpe
+        host_name               linux_nrpe
+        address                 127.0.0.1
+    }
+
+
 
 The main ``linux-nrpe`` template only declares the default NRPE commands configured on the server.
 You can easily adapt the configuration defined in the ``services.cfg`` and ``commands.cfg.parse`` files.
