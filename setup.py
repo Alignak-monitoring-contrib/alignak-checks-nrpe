@@ -3,8 +3,6 @@
 
 import os
 import sys
-import re
-import datetime
 del os.link
 from alignak_setup.tools import get_alignak_cfg, get_files, get_to_be_installed_files, parse_files
 
@@ -99,6 +97,7 @@ setup(
         '': 'README.rst',
         '': 'LICENSE',
         '': 'AUTHORS',
+        '': 'version.py',
         '': [os.path.join(manifest["__pkg_name__"], '*')],
     },
 
