@@ -1,27 +1,44 @@
-Alignak checks package for NRPE
-===============================
+Alignak checks package for Unix/Linux NRPE checked hosts/services
+=================================================================
 
-Checks pack for monitoring hosts with NRPE
+*Checks pack for monitoring Unix/Linux hosts with NRPE active checks*
 
+
+.. image:: https://badge.fury.io/py/alignak_checks_nrpe.svg
+    :target: https://badge.fury.io/py/alignak-checks-nrpe
+    :alt: Most recent PyPi version
+
+.. image:: https://img.shields.io/badge/IRC-%23alignak-1e72ff.svg?style=flat
+    :target: http://webchat.freenode.net/?channels=%23alignak
+    :alt: Join the chat #alignak on freenode.net
+
+.. image:: https://img.shields.io/badge/License-AGPL%20v3-blue.svg
+    :target: http://www.gnu.org/licenses/agpl-3.0
+    :alt: License AGPL v3
 
 Installation
 ------------
+
+The installation of this checks pack will copy some configuration files in the Alignak default configuration directory (eg. */usr/local/etc/alignak*). The copied files are located in the default sub-directory used for the packs (eg. *arbiter/packs*).
 
 From PyPI
 ~~~~~~~~~
 To install the package from PyPI:
 ::
-   pip install alignak-checks-nrpe
+
+   sudo pip install alignak-checks-nrpe
 
 
 From source files
 ~~~~~~~~~~~~~~~~~
 To install the package from the source files:
 ::
+
    git clone https://github.com/Alignak-monitoring-contrib/alignak-checks-nrpe
    cd alignak-checks-nrpe
-   sudo python setup.py install
+   sudo pip install .
 
+**Note:** *using `sudo python setup.py install` will not correctly manage the package configuration files! The recommended way is really to use `pip`;)*
 
 Documentation
 -------------
@@ -29,9 +46,7 @@ Documentation
 Configuration
 ~~~~~~~~~~~~~
 
-**Note**: this pack embeds the ``check_nrpe`` binary from the Nagios plugins, this to avoid to have a complete Nagios installation on your Alignak server!
-
-The embedded version of ``check_nrpe`` is only compatible with 64 bits Linux distros. For Unix (FreeBSD), you can simply install the NRPE plugin:
+For Unix (FreeBSD), you can simply install the NRPE plugin:
 ::
 
    # Simple NRPE
@@ -40,11 +55,11 @@ The embedded version of ``check_nrpe`` is only compatible with 64 bits Linux dis
    # NRPE with SSL
    pkg install nrpe-ssl
 
-If you wish to use the Nagios ``check_nrpe`` plugin, you must install from your system repository:
+For Linux distros, install the Nagios ``check_nrpe`` plugin from your system repository:
 ::
 
    # Install local NRPE plugin
-   apt-get install nagios-nrpe-plugin
+   sudo apt-get install nagios-nrpe-plugin
    # Note: This may install all the Nagios stuff on your machine...
 
 
