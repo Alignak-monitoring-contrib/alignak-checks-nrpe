@@ -138,11 +138,7 @@ Prepare Windows monitored hosts
 
 Some operations are necessary on the Windows monitored hosts if NSClient++ is not yet installed and running.
 
-Install and configure NSClient++ for scheduled NSCA checks.
-
-The example below is an NSClient Ini configuration file that allows to use the NRPE server.
-
-NSClient++ Ini file configuration example:
+Install and configure NSClient++ to allow remote NRPE checks. The example below is an NSClient Ini configuration file that allows to use the NRPE server.
 
 ::
 
@@ -203,7 +199,7 @@ Test remote access with the plugins files:
 Alignak configuration
 ~~~~~~~~~~~~~~~~~~~~~
 
-You simply have to tag the concerned hosts with the template ``linux-nrpe``.
+For a Linux monitored host, you simply have to tag the concerned host with the template ``linux-nrpe``.
 ::
 
     define host{
@@ -214,8 +210,18 @@ You simply have to tag the concerned hosts with the template ``linux-nrpe``.
 
 
 
-The main ``linux-nrpe`` template only declares the default NRPE commands configured on the server.
-You can easily adapt the configuration defined in the ``services.cfg`` and ``commands.cfg.parse`` files.
+
+For a Windows monitored host, you simply have to tag the concerned host with the template ``windows-nrpe``.
+::
+
+    define host{
+        use                     windows-nrpe
+        host_name               windows_nrpe
+        address                 127.0.0.1
+    }
+
+
+
 
 
 Bugs, issues and contributing
