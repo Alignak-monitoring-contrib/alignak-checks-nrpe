@@ -16,6 +16,10 @@ Alignak checks package for Unix/Linux NRPE checked hosts/services
     :target: http://www.gnu.org/licenses/agpl-3.0
     :alt: License AGPL v3
 
+--------------------------------------------------------------------
+**Beware**: This checks pack is now deprecated. It has been replaced with `alignak-checks-linux-nrpe` tha make its naming more consistent with the used naming conventions.
+--------------------------------------------------------------------
+
 Installation
 ------------
 
