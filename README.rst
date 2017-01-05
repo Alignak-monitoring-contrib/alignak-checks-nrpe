@@ -46,6 +46,8 @@ Documentation
 Configuration
 ~~~~~~~~~~~~~
 
+This checks pack is using the `check_nrpe` Nagios plugin that must be installed on the Alignak server running your poller daemon.
+
 For Unix (FreeBSD), you can simply install the NRPE plugin:
 ::
 
@@ -66,19 +68,20 @@ For Linux distros, install the Nagios ``check_nrpe`` plugin from your system rep
 After installation, the plugins are commonly installed in the */usr/local/libexec/nagios* directory.
 
 The */usr/local/etc/alignak/arbiter/packs/resource.d/nrpe.cfg* file defines a global macro
-that contains the NRPE check plugin installation path. If you do not want to use the installed
-plugin (eg. use the Nagios one...), edit this file to update the path
+that contains the NRPE check plugin installation path. You must edit this file to update the default path that is defined to the alignak ``$NAGIOSPLUGINSDIR$`` (defined in alignak default configuration).
 ::
 
     #-- NRPE check plugin installation directory
     # Default is to use the Alignak plugins directory
-    $NRPE_PLUGINS_DIR$=$PLUGINS_DIR$
+    $NRPE_PLUGINS_DIR$=$NAGIOSPLUGINSDIR$
     #--
 
+**Note:** the default value for ``$NAGIOSPLUGINSDIR$`` is set as */usr/lib/nagios/plugins* which is the common installation directory used by the Nagios plugins.
 
 
 Prepare monitored hosts
 ~~~~~~~~~~~~~~~~~~~~~~~
+
 Some operations are necessary on the monitored hosts if NRPE remote access is not yet activated.
 ::
    # Install local NRPE server
@@ -99,10 +102,8 @@ Test remote access with the plugins files:
 ::
    /usr/local/var/libexec/alignak/check_nrpe -H 127.0.0.1 -t 9 -u -c check_load
 
-**Note**: This configuration is the default Nagios NRPE daemon configuration. Thus it does not
-allow to define arguments in the NRPE commands and, as of it, the warning / critical threshold are
-defined on the
-server side.
+**Note**: This configuration is the default Nagios NRPE daemon configuration. As such it does not allow to define arguments in the NRPE commands and, as of it, the warning / critical threshold are defined on the server side.
+
 
 Alignak configuration
 ~~~~~~~~~~~~~~~~~~~~~
@@ -125,12 +126,4 @@ You can easily adapt the configuration defined in the ``services.cfg`` and ``com
 Bugs, issues and contributing
 -----------------------------
 
-Contributions to this project are welcome and encouraged ... issues in the project repository are
-the common way to raise an information.
-
-License
--------
-
-Alignak Pack Checks NRPE is available under the `GPL version 3 license`_.
-
-.. _GPL version 3 license: http://opensource.org/licenses/GPL-3.0
+Contributions to this project are welcome and encouraged ... `issues in the project repository <https://github.com/alignak-monitoring-contrib/alignak-checks-nrpe/issues>`_ are the common way to raise an information.
