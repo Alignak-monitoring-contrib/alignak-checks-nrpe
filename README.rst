@@ -4,6 +4,10 @@ Alignak checks package for NRPE
 Checks pack for monitoring hosts with NRPE
 
 
+--------------------------------------------------------------------
+**Beware**: This checks pack is now deprecated. It has been replaced with `alignak-checks-linux-nrpe` tha make its naming more consistent with the used naming conventions.
+--------------------------------------------------------------------
+
 Installation
 ------------
 
