@@ -1,7 +1,7 @@
-Alignak checks package for Unix/Linux NRPE checked hosts/services
-=================================================================
+Alignak checks package for NRPE checked hosts/services
+======================================================
 
-*Checks pack for monitoring Unix/Linux hosts with NRPE active checks*
+*Checks pack for monitoring Unix/Linux or Windows hosts with NRPE active checks*
 
 
 .. image:: https://badge.fury.io/py/alignak_checks_nrpe.svg
@@ -16,9 +16,6 @@ Alignak checks package for Unix/Linux NRPE checked hosts/services
     :target: http://www.gnu.org/licenses/agpl-3.0
     :alt: License AGPL v3
 
---------------------------------------------------------------------
-**Beware**: This checks pack is now deprecated. It has been replaced with `alignak-checks-linux-nrpe` tha make its naming more consistent with the used naming conventions.
---------------------------------------------------------------------
 
 Installation
 ------------
@@ -107,6 +104,100 @@ Test remote access with the plugins files:
    /usr/local/var/libexec/alignak/check_nrpe -H 127.0.0.1 -t 9 -u -c check_load
 
 **Note**: This configuration is the default Nagios NRPE daemon configuration. As such it does not allow to define arguments in the NRPE commands and, as of it, the warning / critical threshold are defined on the server side.
+
+
+Prepare Unix/Linux monitored hosts
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Some operations are necessary on the monitored hosts if NRPE remote access is not yet activated.
+::
+   # Install local NRPE server
+   su -
+   apt-get update
+   apt-get install nagios-nrpe-server
+   apt-get install nagios-plugins
+
+   # Allow Alignak as a remote host
+   vi /etc/nagios/nrpe.cfg
+   =>
+      allowed_hosts = X.X.X.X
+
+   # Restart NRPE daemon
+   /etc/init.d/nagios-nrpe-server start
+
+Test remote access with the plugins files:
+::
+
+   /usr/lib/nagios/plugins/check_nrpe -H 127.0.0.1 -t 9 -u -c check_load
+
+**Note**: This configuration is the default Nagios NRPE daemon configuration. As such it does not allow to define arguments in the NRPE commands and, as of it, the warning / critical threshold are defined on the server side.
+
+
+Prepare Windows monitored hosts
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Some operations are necessary on the Windows monitored hosts if NSClient++ is not yet installed and running.
+
+Install and configure NSClient++ for scheduled NSCA checks.
+
+The example below is an NSClient Ini configuration file that allows to use the NRPE server.
+
+NSClient++ Ini file configuration example:
+
+::
+
+    # -----------------------------------------------------------------------------
+    # c:\Program Files\NSClient++\nsclient.ini
+    # -----------------------------------------------------------------------------
+
+    [/modules]
+    CheckExternalScripts = 1
+    CheckEventLog = 1
+    CheckDisk = 1
+    CheckSystem = 1
+    NRPEServer = 1
+
+    [/settings/default]
+    ; Alignak server Ip address
+    allowed hosts = address = 192.168.15.1
+
+    [/settings/external scripts/alias]
+    alias_cpu = checkCPU warn=80 crit=90 time=5m time=1m time=30s
+    alias_cpu_ex = checkCPU warn=$ARG1$ crit=$ARG2$ time=5m time=1m time=30s
+    alias_disk = CheckDriveSize MinWarn=10% MinCrit=5% CheckAll FilterType=FIXED
+    alias_disk_loose = CheckDriveSize MinWarn=10% MinCrit=5% CheckAll FilterType=FIXED ignore-unreadable
+    alias_event_log = CheckEventLog file=application file=system MaxWarn=1 MaxCrit=1 "filter=generated gt -2d AND severity NOT IN ('success', 'informational') AND source != 'SideBySide'" truncate=800 unique descriptions "syntax=%severity%: %source%: %message% (%count%)"
+    alias_file_age = checkFile2 filter=out "file=$ARG1$" filter-written=>1d MaxWarn=1 MaxCrit=1 "syntax=%filename% %write%"
+    alias_file_size = CheckFiles "filter=size > $ARG2$" "path=$ARG1$" MaxWarn=1 MaxCrit=1 "syntax=%filename% %size%" max-dir-depth=10
+    alias_mem = checkMem MaxWarn=80% MaxCrit=90% ShowAll=long type=physical type=virtual type=paged type=page
+    alias_process = checkProcState "$ARG1$=started"
+    alias_process_count = checkProcState MaxWarnCount=$ARG2$ MaxCritCount=$ARG3$ "$ARG1$=started"
+    alias_process_hung = checkProcState MaxWarnCount=1 MaxCritCount=1 "$ARG1$=hung"
+    alias_process_stopped = checkProcState "$ARG1$=stopped"
+    alias_sched_all = CheckTaskSched "filter=exit_code ne 0" "syntax=%title%: %exit_code%" warn=>0
+    alias_sched_long = CheckTaskSched "filter=status = 'running' AND most_recent_run_time < -$ARG1$" "syntax=%title% (%most_recent_run_time%)" warn=>0
+    alias_sched_task = CheckTaskSched "filter=title eq '$ARG1$' AND exit_code ne 0" "syntax=%title% (%most_recent_run_time%)" warn=>0
+    alias_service = checkServiceState CheckAll
+    alias_service_ex = checkServiceState CheckAll "exclude=Net Driver HPZ12" "exclude=Pml Driver HPZ12" exclude=stisvc
+    alias_up = checkUpTime MinWarn=1d MinWarn=1h
+    alias_updates = check_updates -warning 0 -critical 0
+    alias_volumes = CheckDriveSize MinWarn=10% MinCrit=5% CheckAll=volumes FilterType=FIXED
+    alias_volumes_loose = CheckDriveSize MinWarn=10% MinCrit=5% CheckAll=volumes FilterType=FIXED ignore-unreadable
+    default =
+
+    [/settings/NRPE/server]
+    ; COMMAND ARGUMENT PROCESSING - This option determines whether or not the we will allow clients to specify arguments to commands that are executed.
+    allow arguments = true
+
+    allow nasty characters = false
+    insecure = true
+    encoding = utf8
+
+Test remote access with the plugins files:
+::
+
+   /usr/lib/nagios/plugins/check_nrpe -H 127.0.0.1 -t 9 -u -c check_load
+
 
 
 Alignak configuration
