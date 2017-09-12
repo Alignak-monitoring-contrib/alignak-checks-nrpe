@@ -15,10 +15,10 @@ __pkg_name__ = u"alignak_checks_nrpe"
 # Used for:
 # - PyPI keywords
 # - directory where to store files in the Alignak configuration (eg. arbiter/packs/checks_type)
-__checks_type__ = u"linux-nrpe"
+__checks_type__ = u"nrpe"
 
 # Application manifest
-__version__ = u"0.3.2"
+__version__ = u"1.0.0"
 __author__ = u"Frédéric MOHIER"
 __author_email__ = u"frederic.mohier@alignak.net"
 __copyright__ = u"(c) 2015-2017 - %s" % __author__

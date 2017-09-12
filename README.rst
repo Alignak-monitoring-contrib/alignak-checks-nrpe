@@ -17,6 +17,9 @@ Alignak checks package for NRPE checked hosts/services
     :alt: License AGPL v3
 
 
+**Note:** *this check pack is only an example for checking linux / windows hosts using the Nagios NRPE commands. Please feel free to comment or suggest improvements :)*
+
+
 Installation
 ------------
 
@@ -57,6 +60,9 @@ For Unix (FreeBSD), you can simply install the NRPE plugin:
 
    # NRPE with SSL
    pkg install nrpe-ssl
+
+   # Take care to copy/rename the check_nrpe2 to check_nrpe if needed! Else, replace the check_nrpe
+   # command with check_nrpe2
 
 For Linux distros, install the Nagios ``check_nrpe`` plugin from your system repository:
 ::
