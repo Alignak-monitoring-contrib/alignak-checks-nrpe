@@ -17,6 +17,9 @@ Alignak checks package for NRPE checked hosts/services
     :alt: License AGPL v3
 
 
+**Note:** *this check pack is only an example for checking linux / windows hosts using the Nagios NRPE commands. Please feel free to comment or suggest improvements :)*
+
+
 Installation
 ------------
 
