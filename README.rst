@@ -86,32 +86,6 @@ that contains the NRPE check plugin installation path. You must edit this file t
 **Note:** the default value for ``$NAGIOSPLUGINSDIR$`` is set as */usr/lib/nagios/plugins* which is the common installation directory used by the Nagios plugins.
 
 
-Prepare monitored hosts
-~~~~~~~~~~~~~~~~~~~~~~~
-
-Some operations are necessary on the monitored hosts if NRPE remote access is not yet activated.
-::
-   # Install local NRPE server
-   su -
-   apt-get update
-   apt-get install nagios-nrpe-server
-   apt-get install nagios-plugins
-
-   # Allow Alignak as a remote host
-   vi /etc/nagios/nrpe.cfg
-   =>
-      allowed_hosts = X.X.X.X
-
-   # Restart NRPE daemon
-   /etc/init.d/nagios-nrpe-server start
-
-Test remote access with the plugins files:
-::
-   /usr/local/var/libexec/alignak/check_nrpe -H 127.0.0.1 -t 9 -u -c check_load
-
-**Note**: This configuration is the default Nagios NRPE daemon configuration. As such it does not allow to define arguments in the NRPE commands and, as of it, the warning / critical threshold are defined on the server side.
-
-
 Prepare Unix/Linux monitored hosts
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
