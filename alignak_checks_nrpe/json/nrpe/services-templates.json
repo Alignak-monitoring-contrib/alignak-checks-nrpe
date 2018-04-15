@@ -84,8 +84,8 @@
         ],
         "aggregation": "system/IPMI",
         "alias": "IPMI sensors",
-        "check_command": "check_ipmi_sensors",
-        "check_command_args": "",
+        "check_command": "check_nrpe",
+        "check_command_args": "check_ipmi_sensors",
         "host": "freebsd-nrpe-ipmi",
         "name": "IPMI sensors"
     },
@@ -98,8 +98,8 @@
         ],
         "aggregation": "system/IPMI",
         "alias": "IPMI Sensors data repository",
-        "check_command": "check_ipmi_sdr_ok",
-        "check_command_args": "",
+        "check_command": "check_nrpe",
+        "check_command_args": "check_ipmi_sdr_ok",
         "host": "freebsd-nrpe-ipmi",
         "name": "IPMI Sensors data repository"
     },
@@ -154,24 +154,10 @@
         ],
         "aggregation": "system/disks",
         "alias": "Disk I/O",
-        "check_command": "check_iostat_bsd",
-        "check_command_args": "",
+        "check_command": "check_nrpe",
+        "check_command_args": "check_iostat_bsd",
         "host": "freebsd-nrpe",
-        "name": "Disk I/O"
-    },
-    {
-        "_is_template": true,
-        "_realm": "All",
-        "_sub_realm": true,
-        "_templates": [
-            "freebsd-nrpe-service"
-        ],
-        "aggregation": "system/disks",
-        "alias": "Opened files",
-        "check_command": "check_openedfiles",
-        "check_command_args": "",
-        "host": "freebsd-nrpe",
-        "name": "Opened files"
+        "name": "Disk IO"
     },
     {
         "_is_template": true,
@@ -190,7 +176,7 @@
             "_FIXACTIONS": "Clean the appropriate disks"
         },
         "host": "linux-nrpe",
-        "name": "Disk root"
+        "name": "Linux disk root"
     },
     {
         "_is_template": true,
@@ -228,7 +214,7 @@
             "_FIXACTIONS": "Clean the appropriate disks"
         },
         "host": "linux-nrpe",
-        "name": "Disk var"
+        "name": "Linux disk var"
     },
     {
         "_is_template": true,
@@ -266,7 +252,7 @@
             "_FIXACTIONS": "Clean the appropriate disks"
         },
         "host": "linux-nrpe",
-        "name": "Disk usr"
+        "name": "Linux disk usr"
     },
     {
         "_is_template": true,
@@ -304,7 +290,7 @@
             "_FIXACTIONS": "Clean the appropriate disks"
         },
         "host": "linux-nrpe",
-        "name": "Disk tmp"
+        "name": "Linux disk tmp"
     },
     {
         "_is_template": true,
@@ -342,7 +328,7 @@
             "_FIXACTIONS": "If recurrent situation then make performance audit"
         },
         "host": "linux-nrpe",
-        "name": "Load"
+        "name": "Linux load"
     },
     {
         "_is_template": true,
@@ -399,7 +385,7 @@
             "_FIXACTIONS": "Search memory processes consumers. Add more memory."
         },
         "host": "linux-nrpe",
-        "name": "Memory"
+        "name": "Linux memory"
     },
     {
         "_is_template": true,
@@ -432,7 +418,7 @@
         "check_command": "check_nrpe",
         "check_command_args": "check_users",
         "host": "linux-nrpe",
-        "name": "Users"
+        "name": "Linux users"
     },
     {
         "_is_template": true,
@@ -465,7 +451,7 @@
             "_FIXACTIONS": "Try to decrease the running processus number"
         },
         "host": "linux-nrpe",
-        "name": "Processus"
+        "name": "Linux processus"
     },
     {
         "_is_template": true,
@@ -503,7 +489,7 @@
             "_FIXACTIONS": "Kill the dead zombie processus"
         },
         "host": "linux-nrpe",
-        "name": "Zombies"
+        "name": "Linux zombies"
     },
     {
         "_is_template": true,
