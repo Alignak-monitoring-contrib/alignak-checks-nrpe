@@ -86,7 +86,7 @@
         "alias": "IPMI sensors",
         "check_command": "check_ipmi_sensors",
         "check_command_args": "",
-        "host": "freebsd-nrpe",
+        "host": "freebsd-nrpe-ipmi",
         "name": "IPMI sensors"
     },
     {
@@ -100,7 +100,7 @@
         "alias": "IPMI Sensors data repository",
         "check_command": "check_ipmi_sdr_ok",
         "check_command_args": "",
-        "host": "freebsd-nrpe",
+        "host": "freebsd-nrpe-ipmi",
         "name": "IPMI Sensors data repository"
     },
     {
@@ -111,11 +111,39 @@
             "freebsd-nrpe-service"
         ],
         "aggregation": "system/disks",
-        "alias": "Disk RAID",
-        "check_command": "check_raid",
-        "check_command_args": "",
+        "alias": "Opened files",
+        "check_command": "check_nrpe",
+        "check_command_args": "check_openedfiles",
         "host": "freebsd-nrpe",
+        "name": "Opened files"
+    },
+    {
+        "_is_template": true,
+        "_realm": "All",
+        "_sub_realm": true,
+        "_templates": [
+            "freebsd-nrpe-service"
+        ],
+        "aggregation": "system/disks",
+        "alias": "Disk RAID",
+        "check_command": "check_nrpe",
+        "check_command_args": "check_raid",
+        "host": "freebsd-nrpe-raid",
         "name": "Disk RAID"
+    },
+    {
+        "_is_template": true,
+        "_realm": "All",
+        "_sub_realm": true,
+        "_templates": [
+            "freebsd-nrpe-service"
+        ],
+        "aggregation": "system/disks",
+        "alias": "Disk zfs",
+        "check_command": "check_nrpe",
+        "check_command_args": "check_zpools",
+        "host": "freebsd-nrpe-zpool",
+        "name": "Disk zfs"
     },
     {
         "_is_template": true,
@@ -180,7 +208,7 @@
             "_IMPACT": "Depends on disks, cause system instability",
             "_FIXACTIONS": "Clean the appropriate disks"
         },
-        "host": "freebsd-nrpe",
+        "host": "freebsd-nrpe-disk",
         "name": "Disk root"
     },
     {
@@ -218,7 +246,7 @@
             "_IMPACT": "Depends on disks, cause system instability",
             "_FIXACTIONS": "Clean the appropriate disks"
         },
-        "host": "freebsd-nrpe",
+        "host": "freebsd-nrpe-disk",
         "name": "Disk var"
     },
     {
@@ -256,7 +284,7 @@
             "_IMPACT": "Depends on disks, cause system instability",
             "_FIXACTIONS": "Clean the appropriate disks"
         },
-        "host": "freebsd-nrpe",
+        "host": "freebsd-nrpe-disk",
         "name": "Disk usr"
     },
     {
@@ -294,7 +322,7 @@
             "_IMPACT": "Depends on disks, cause system instability",
             "_FIXACTIONS": "Clean the appropriate disks"
         },
-        "host": "freebsd-nrpe",
+        "host": "freebsd-nrpe-disk",
         "name": "Disk tmp"
     },
     {
@@ -504,10 +532,24 @@
             "freebsd-nrpe-service"
         ],
         "aggregation": "system",
+        "alias": "Swap",
+        "check_command": "check_nrpe",
+        "check_command_args": "check_swap",
+        "host": "freebsd-nrpe",
+        "name": "Swap"
+    },
+    {
+        "_is_template": true,
+        "_realm": "All",
+        "_sub_realm": true,
+        "_templates": [
+            "freebsd-nrpe-service"
+        ],
+        "aggregation": "system",
         "alias": "Firewall",
         "check_command": "check_nrpe",
         "check_command_args": "check_pf",
-        "host": "freebsd-nrpe",
+        "host": "freebsd-nrpe-firewall",
         "name": "Firewall"
     },
     {

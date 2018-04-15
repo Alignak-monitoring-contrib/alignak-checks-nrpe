@@ -24,6 +24,61 @@
     },
     {
         "_is_template": true,
+        "_templates": [
+            "freebsd-nrpe"
+        ],
+        "alias": "Firewall",
+        "name": "freebsd-nrpe-firewall",
+        "tags": [
+            "Firewall"
+        ]
+    },
+    {
+        "_is_template": true,
+        "_templates": [
+            "freebsd-nrpe"
+        ],
+        "alias": "IPMI",
+        "name": "freebsd-nrpe-ipmi",
+        "tags": [
+            "IPMI"
+        ]
+    },
+    {
+        "_is_template": true,
+        "_templates": [
+            "freebsd-nrpe"
+        ],
+        "alias": "Local disk",
+        "name": "freebsd-nrpe-disk",
+        "tags": [
+            "Disks"
+        ]
+    },
+    {
+        "_is_template": true,
+        "_templates": [
+            "freebsd-nrpe"
+        ],
+        "alias": "ZPool disk",
+        "name": "freebsd-nrpe-zpool",
+        "tags": [
+            "zpool"
+        ]
+    },
+    {
+        "_is_template": true,
+        "_templates": [
+            "freebsd-nrpe"
+        ],
+        "alias": "RAID disk",
+        "name": "freebsd-nrpe-raid",
+        "tags": [
+            "RAID"
+        ]
+    },
+    {
+        "_is_template": true,
         "_realm": "All",
         "_sub_realm": true,
         "_templates_with_services": true,
