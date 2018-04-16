@@ -43,7 +43,6 @@
             "linux-nrpe-service"
         ],
         "aggregation": "system",
-        "alias": "NRPE status",
         "check_command": "check_nrpe_version",
         "check_command_args": "",
         "customs": {
@@ -63,7 +62,6 @@
             "linux-nrpe-service"
         ],
         "aggregation": "system",
-        "alias": "NRPE status",
         "check_command": "check_nrpe_version",
         "check_command_args": "",
         "customs": {
@@ -83,7 +81,6 @@
             "freebsd-nrpe-service"
         ],
         "aggregation": "system/IPMI",
-        "alias": "IPMI sensors",
         "check_command": "check_nrpe",
         "check_command_args": "check_ipmi_sensors",
         "host": "freebsd-nrpe-ipmi",
@@ -97,7 +94,6 @@
             "freebsd-nrpe-service"
         ],
         "aggregation": "system/IPMI",
-        "alias": "IPMI Sensors data repository",
         "check_command": "check_nrpe",
         "check_command_args": "check_ipmi_sdr_ok",
         "host": "freebsd-nrpe-ipmi",
@@ -111,7 +107,6 @@
             "freebsd-nrpe-service"
         ],
         "aggregation": "system/disks",
-        "alias": "Opened files",
         "check_command": "check_nrpe",
         "check_command_args": "check_openedfiles",
         "host": "freebsd-nrpe",
@@ -125,7 +120,6 @@
             "freebsd-nrpe-service"
         ],
         "aggregation": "system/disks",
-        "alias": "Disk RAID",
         "check_command": "check_nrpe",
         "check_command_args": "check_raid",
         "host": "freebsd-nrpe-raid",
@@ -139,7 +133,6 @@
             "freebsd-nrpe-service"
         ],
         "aggregation": "system/disks",
-        "alias": "Disk zfs",
         "check_command": "check_nrpe",
         "check_command_args": "check_zpools",
         "host": "freebsd-nrpe-zpool",
@@ -153,7 +146,6 @@
             "freebsd-nrpe-service"
         ],
         "aggregation": "system/disks",
-        "alias": "Disk I/O",
         "check_command": "check_nrpe",
         "check_command_args": "check_iostat_bsd",
         "host": "freebsd-nrpe",
@@ -167,7 +159,6 @@
             "linux-nrpe-service"
         ],
         "aggregation": "system/disks",
-        "alias": "Disk root",
         "check_command": "check_nrpe",
         "check_command_args": "check_root",
         "customs": {
@@ -186,7 +177,6 @@
             "freebsd-nrpe-service"
         ],
         "aggregation": "system/disks",
-        "alias": "Disk root",
         "check_command": "check_nrpe",
         "check_command_args": "check_disk_root",
         "customs": {
@@ -205,7 +195,6 @@
             "linux-nrpe-service"
         ],
         "aggregation": "system/disks",
-        "alias": "Disk var",
         "check_command": "check_nrpe",
         "check_command_args": "check_var",
         "customs": {
@@ -224,7 +213,6 @@
             "freebsd-nrpe-service"
         ],
         "aggregation": "system/disks",
-        "alias": "Disk var",
         "check_command": "check_nrpe",
         "check_command_args": "check_disk_var",
         "customs": {
@@ -243,7 +231,6 @@
             "linux-nrpe-service"
         ],
         "aggregation": "system/disks",
-        "alias": "Disk usr",
         "check_command": "check_nrpe",
         "check_command_args": "check_usr",
         "customs": {
@@ -262,7 +249,6 @@
             "freebsd-nrpe-service"
         ],
         "aggregation": "system/disks",
-        "alias": "Disk usr",
         "check_command": "check_nrpe",
         "check_command_args": "check_disk_usr",
         "customs": {
@@ -281,7 +267,6 @@
             "linux-nrpe-service"
         ],
         "aggregation": "system/disks",
-        "alias": "Disk tmp",
         "check_command": "check_nrpe",
         "check_command_args": "check_tmp",
         "customs": {
@@ -300,7 +285,6 @@
             "freebsd-nrpe-service"
         ],
         "aggregation": "system/disks",
-        "alias": "Disk tmp",
         "check_command": "check_nrpe",
         "check_command_args": "check_disk_tmp",
         "customs": {
@@ -319,7 +303,6 @@
             "linux-nrpe-service"
         ],
         "aggregation": "system/health",
-        "alias": "Load",
         "check_command": "check_nrpe",
         "check_command_args": "check_load",
         "customs": {
@@ -338,7 +321,6 @@
             "freebsd-nrpe-service"
         ],
         "aggregation": "system/health",
-        "alias": "Load",
         "check_command": "check_nrpe",
         "check_command_args": "check_load",
         "customs": {
@@ -376,7 +358,6 @@
             "linux-nrpe-service"
         ],
         "aggregation": "system/health",
-        "alias": "Memory",
         "check_command": "check_nrpe",
         "check_command_args": "check_mem",
         "customs": {
@@ -395,7 +376,6 @@
             "freebsd-nrpe-service"
         ],
         "aggregation": "system/health",
-        "alias": "Memory",
         "check_command": "check_nrpe",
         "check_command_args": "check_mem",
         "customs": {
@@ -414,7 +394,6 @@
             "linux-nrpe-service"
         ],
         "aggregation": "system/health",
-        "alias": "Users",
         "check_command": "check_nrpe",
         "check_command_args": "check_users",
         "host": "linux-nrpe",
@@ -428,7 +407,6 @@
             "freebsd-nrpe-service"
         ],
         "aggregation": "system/health",
-        "alias": "Users",
         "check_command": "check_nrpe",
         "check_command_args": "check_users",
         "host": "freebsd-nrpe",
@@ -442,7 +420,6 @@
             "linux-nrpe-service"
         ],
         "aggregation": "system/health",
-        "alias": "Processus",
         "check_command": "check_nrpe",
         "check_command_args": "check_total_procs",
         "customs": {
@@ -461,7 +438,6 @@
             "freebsd-nrpe-service"
         ],
         "aggregation": "system/health",
-        "alias": "Processus",
         "check_command": "check_nrpe",
         "check_command_args": "check_total_procs",
         "customs": {
@@ -480,7 +456,6 @@
             "linux-nrpe-service"
         ],
         "aggregation": "system/health",
-        "alias": "Zombies",
         "check_command": "check_nrpe",
         "check_command_args": "check_zombie_procs",
         "customs": {
@@ -499,7 +474,6 @@
             "freebsd-nrpe-service"
         ],
         "aggregation": "system/health",
-        "alias": "Zombies",
         "check_command": "check_nrpe",
         "check_command_args": "check_zombie_procs",
         "customs": {
@@ -518,7 +492,6 @@
             "freebsd-nrpe-service"
         ],
         "aggregation": "system",
-        "alias": "Swap",
         "check_command": "check_nrpe",
         "check_command_args": "check_swap",
         "host": "freebsd-nrpe",
@@ -532,7 +505,6 @@
             "freebsd-nrpe-service"
         ],
         "aggregation": "system",
-        "alias": "Firewall",
         "check_command": "check_nrpe",
         "check_command_args": "check_pf",
         "host": "freebsd-nrpe-firewall",
@@ -546,7 +518,6 @@
             "freebsd-nrpe-service"
         ],
         "aggregation": "system",
-        "alias": "Up-to-date",
         "check_command": "check_nrpe",
         "check_command_args": "check_pkgaudit",
         "host": "freebsd-nrpe",
@@ -560,7 +531,6 @@
             "freebsd-nrpe-service"
         ],
         "aggregation": "system",
-        "alias": "NTP time",
         "check_command": "check_nrpe",
         "check_command_args": "check_ntp_time",
         "host": "freebsd-nrpe",

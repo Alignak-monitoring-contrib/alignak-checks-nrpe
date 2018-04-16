@@ -100,7 +100,7 @@ if [ $? -ne 0 ]; then
     ERROR_FOUND=$((ERROR_FOUND + 1))
 fi
 
-echo "alignak-backend-cli $ARGUMENTS -v -f "$JSON_FILES" -t service -d services-templates.json add"
+echo "alignak-backend-cli $ARGUMENTS -f "$JSON_FILES" -t service -d services-templates.json add"
 alignak-backend-cli $ARGUMENTS -f "$JSON_FILES" -t service -d services-templates.json add
 if [ $? -ne 0 ]; then
     echo "Failed to import file :("

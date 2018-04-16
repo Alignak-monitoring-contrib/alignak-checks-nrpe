@@ -5,7 +5,7 @@
         "_sub_realm": true,
         "_templates_with_services": true,
         "active_checks_enabled": true,
-        "alias": "",
+        "alias": "Freebsd host",
         "check_command": "check_nrpe_alive",
         "check_command_args": "",
         "check_period": "24x7",
@@ -27,7 +27,7 @@
         "_templates": [
             "freebsd-nrpe"
         ],
-        "alias": "Firewall",
+        "alias": "Freebsd with Firewall",
         "name": "freebsd-nrpe-firewall",
         "tags": [
             "Firewall"
@@ -38,7 +38,7 @@
         "_templates": [
             "freebsd-nrpe"
         ],
-        "alias": "IPMI",
+        "alias": "Freebsd with IPMI",
         "name": "freebsd-nrpe-ipmi",
         "tags": [
             "IPMI"
@@ -49,7 +49,7 @@
         "_templates": [
             "freebsd-nrpe"
         ],
-        "alias": "Local disk",
+        "alias": "Freebsd with local disk",
         "name": "freebsd-nrpe-disk",
         "tags": [
             "Disks"
@@ -60,7 +60,7 @@
         "_templates": [
             "freebsd-nrpe"
         ],
-        "alias": "ZPool disk",
+        "alias": "Freebsd with ZPool disk",
         "name": "freebsd-nrpe-zpool",
         "tags": [
             "zpool"
@@ -71,7 +71,7 @@
         "_templates": [
             "freebsd-nrpe"
         ],
-        "alias": "RAID disk",
+        "alias": "Freebsd with RAID disk",
         "name": "freebsd-nrpe-raid",
         "tags": [
             "RAID"
@@ -83,7 +83,7 @@
         "_sub_realm": true,
         "_templates_with_services": true,
         "active_checks_enabled": true,
-        "alias": "",
+        "alias": "Linux host",
         "check_command": "check_nrpe_alive",
         "check_command_args": "",
         "check_period": "24x7",
@@ -106,7 +106,7 @@
         "_sub_realm": true,
         "_templates_with_services": true,
         "active_checks_enabled": true,
-        "alias": "",
+        "alias": "Windows host",
         "check_command": "check_nrpe_alive",
         "check_command_args": "",
         "check_period": "24x7",
