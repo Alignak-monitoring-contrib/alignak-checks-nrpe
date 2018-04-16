@@ -6,13 +6,16 @@
         "aggregation": "",
         "active_checks_enabled": true,
         "alias": "",
+        "check_interval": 5,
         "check_period": "24x7",
         "host": "_dummy",
         "imported_from": "alignak-checks-nrpe",
         "initial_state": "x",
+        "max_check_attempts": 3,
         "name": "freebsd-nrpe-service",
         "notes": "",
         "notes_url": "",
+        "retry_interval": 1,
         "tags": [
             "nrpe-service"
         ]
