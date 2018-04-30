@@ -60,6 +60,17 @@
         "_templates": [
             "freebsd-nrpe"
         ],
+        "alias": "Freebsd with local disk I/O check",
+        "name": "freebsd-nrpe-disk-io",
+        "tags": [
+            "Disks"
+        ]
+    },
+    {
+        "_is_template": true,
+        "_templates": [
+            "freebsd-nrpe"
+        ],
         "alias": "Freebsd with ZPool disk",
         "name": "freebsd-nrpe-zpool",
         "tags": [
@@ -88,7 +99,7 @@
         "check_command_args": "",
         "check_period": "24x7",
         "customs": {
-            "_NRPE_TIMEOUT": 10,
+            "_NRPE_TIMEOUT": "10",
             "_NRPE_SSL": "-n"
         },
         "imported_from": "alignak-checks-nrpe",

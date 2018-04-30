@@ -112,7 +112,7 @@
         "aggregation": "system/disks",
         "check_command": "check_nrpe",
         "check_command_args": "check_openedfiles",
-        "host": "freebsd-nrpe",
+        "host": "freebsd-nrpe-disk",
         "name": "Opened files"
     },
     {
@@ -151,7 +151,7 @@
         "aggregation": "system/disks",
         "check_command": "check_nrpe",
         "check_command_args": "check_iostat_bsd",
-        "host": "freebsd-nrpe",
+        "host": "freebsd-nrpe-disk-io",
         "name": "Disk IO"
     },
     {
@@ -344,7 +344,7 @@
         "aggregation": "system/health",
         "alias": "Cpu",
         "check_command": "check_nrpe",
-        "check_command_args": "check_cpu",
+        "check_command_args": "check_cpu_usage",
         "customs": {
             "_DETAILLEDESC": "Detect abnormal CPU usage",
             "_IMPACT": "Slow down applications hosted by the system",
