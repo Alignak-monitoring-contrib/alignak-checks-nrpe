@@ -27,16 +27,14 @@ The installation of this checks pack will copy some configuration files in the A
 
 From PyPI
 ~~~~~~~~~
-To install the package from PyPI:
-::
+To install the package from PyPI::
 
    sudo pip install alignak-checks-nrpe
 
 
 From source files
 ~~~~~~~~~~~~~~~~~
-To install the package from the source files:
-::
+To install the package from the source files::
 
    git clone https://github.com/Alignak-monitoring-contrib/alignak-checks-nrpe
    cd alignak-checks-nrpe
@@ -52,8 +50,7 @@ Configuration
 
 This checks pack is using the `check_nrpe` Nagios plugin that must be installed on the Alignak server running your poller daemon.
 
-For Unix (FreeBSD), you can simply install the NRPE plugin:
-::
+For Unix (FreeBSD), you can simply install the NRPE plugin::
 
    # Simple NRPE
    pkg install nrpe
@@ -64,8 +61,7 @@ For Unix (FreeBSD), you can simply install the NRPE plugin:
    # Take care to copy/rename the check_nrpe2 to check_nrpe if needed! Else, replace the check_nrpe
    # command with check_nrpe2
 
-For Linux distros, install the Nagios ``check_nrpe`` plugin from your system repository:
-::
+For Linux distros, install the Nagios ``check_nrpe`` plugin from your system repository::
 
    # Install local NRPE plugin
    sudo apt-get install nagios-nrpe-plugin
@@ -76,7 +72,7 @@ After installation, the plugins are commonly installed in the */usr/local/libexe
 
 The */usr/local/etc/alignak/arbiter/packs/resource.d/nrpe.cfg* file defines a global macro
 that contains the NRPE check plugin installation path. You must edit this file to update the default path that is defined to the alignak ``$NAGIOSPLUGINSDIR$`` (defined in alignak default configuration).
-::
+ ::
 
     #-- NRPE check plugin installation directory
     # Default is to use the Alignak plugins directory
@@ -90,7 +86,8 @@ Prepare Unix/Linux monitored hosts
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Some operations are necessary on the monitored hosts if NRPE remote access is not yet activated.
-::
+ ::
+
    # Install local NRPE server
    su -
    apt-get update
@@ -106,7 +103,7 @@ Some operations are necessary on the monitored hosts if NRPE remote access is no
    /etc/init.d/nagios-nrpe-server start
 
 Test remote access with the plugins files:
-::
+ ::
 
    /usr/lib/nagios/plugins/check_nrpe -H 127.0.0.1 -t 9 -u -c check_load
 
@@ -120,7 +117,7 @@ Some operations are necessary on the Windows monitored hosts if NSClient++ is no
 
 Install and configure NSClient++ to allow remote NRPE checks. The example below is an NSClient Ini configuration file that allows to use the NRPE server.
 
-::
+ ::
 
     # -----------------------------------------------------------------------------
     # c:\Program Files\NSClient++\nsclient.ini
@@ -169,8 +166,7 @@ Install and configure NSClient++ to allow remote NRPE checks. The example below 
     insecure = true
     encoding = utf8
 
-Test remote access with the plugins files:
-::
+Test remote access with the plugins files::
 
    /usr/lib/nagios/plugins/check_nrpe -H 127.0.0.1 -t 9 -u -c check_load
 
@@ -180,7 +176,7 @@ Alignak configuration
 ~~~~~~~~~~~~~~~~~~~~~
 
 For a Linux monitored host, you simply have to tag the concerned host with the template ``linux-nrpe``.
-::
+ ::
 
     define host{
         use                     linux-nrpe
@@ -192,15 +188,13 @@ For a Linux monitored host, you simply have to tag the concerned host with the t
 
 
 For a Windows monitored host, you simply have to tag the concerned host with the template ``windows-nrpe``.
-::
+ ::
 
     define host{
         use                     windows-nrpe
         host_name               windows_nrpe
         address                 127.0.0.1
     }
-
-
 
 
 
