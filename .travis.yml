@@ -35,7 +35,7 @@ deploy:
     key:
       secure: "pt6m2E0ffC5JvnvpqVgTpHt3s3j07BvBzyHzVdOW6f8sAoZEzzs1RjrhiUL4GNWJDX+Iy1uSQJ4l8QJ9zkiO3+V0g5LTr/gSW15Xu8YgTy37mBCcvLILljoWkZK8l9nbZFxKXO4N2iw0l20gNzq6FQ2oW+ZnOj2yAwfHfrcX1HjdwWNOoZ/KpVqzKO3hUxzgfWkopMm/6knEPfk/HOBaLz8KOqEclCI743aj7meq2YeKDbYpCCi6I06adJQG83Z7x2SKb9GY1AnIUmLcJ6ixpePAGb5DpfY7pZozjobsgk8XmJFnVXLbnrIUiTG7th5bOC7GwCSaXylIOJlwpZRLti8wdFZv3VvaDgXbxt3cvB8s+xuquI43uhFgU4EMRicbl7FhOLgOfkk1mJXxiUsEtJXpKu1w41sL+JR4AHLWnshcSC7unLc0NpHfsg5yUF+MGmN379V62uuGU8EQ4uoERtYyP2DJHGjy1cwA5X8WtonCc5S2IuDJGh83ZY8e2LEIhZnWXcg7Api1aXd6uPMi51vqzrxTBdcaEp5+gjOjcYVLzAC0FQmR2/P+1PaEdsoHhnp1q1xrJOaN9DYW7I/kzUb//IPsTwZ8bbOLQ56c8LXu5NaFrdUF604C3V8rG0ofC3btxhjej+y7dF6XKlkkYrt/VgpvsLQu97ievVAGhqw="
     on:
-      branch: develop
+      all_branches: true
   - provider: bintray
     skip_cleanup: true
     file: dist/.bintray-deb.json
@@ -51,7 +51,7 @@ deploy:
     key:
       secure: "pt6m2E0ffC5JvnvpqVgTpHt3s3j07BvBzyHzVdOW6f8sAoZEzzs1RjrhiUL4GNWJDX+Iy1uSQJ4l8QJ9zkiO3+V0g5LTr/gSW15Xu8YgTy37mBCcvLILljoWkZK8l9nbZFxKXO4N2iw0l20gNzq6FQ2oW+ZnOj2yAwfHfrcX1HjdwWNOoZ/KpVqzKO3hUxzgfWkopMm/6knEPfk/HOBaLz8KOqEclCI743aj7meq2YeKDbYpCCi6I06adJQG83Z7x2SKb9GY1AnIUmLcJ6ixpePAGb5DpfY7pZozjobsgk8XmJFnVXLbnrIUiTG7th5bOC7GwCSaXylIOJlwpZRLti8wdFZv3VvaDgXbxt3cvB8s+xuquI43uhFgU4EMRicbl7FhOLgOfkk1mJXxiUsEtJXpKu1w41sL+JR4AHLWnshcSC7unLc0NpHfsg5yUF+MGmN379V62uuGU8EQ4uoERtYyP2DJHGjy1cwA5X8WtonCc5S2IuDJGh83ZY8e2LEIhZnWXcg7Api1aXd6uPMi51vqzrxTBdcaEp5+gjOjcYVLzAC0FQmR2/P+1PaEdsoHhnp1q1xrJOaN9DYW7I/kzUb//IPsTwZ8bbOLQ56c8LXu5NaFrdUF604C3V8rG0ofC3btxhjej+y7dF6XKlkkYrt/VgpvsLQu97ievVAGhqw="
     on:
-      branch: develop
+      all_branches: true
   - provider: bintray
     skip_cleanup: true
     file: dist/.bintray-rpm.json
