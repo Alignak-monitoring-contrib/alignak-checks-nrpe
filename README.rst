@@ -23,20 +23,54 @@ Alignak checks package for NRPE checked hosts/services
 Installation
 ------------
 
-The installation of this checks pack will copy some configuration files in the Alignak default configuration directory (eg. */usr/local/etc/alignak*). The copied files are located in the default sub-directory used for the packs (eg. *arbiter/packs*).
+The installation of this checks pack will copy some configuration files in the Alignak default configuration directory (eg. */usr/local/share/alignak/etc*).
+The copied files are located in the default sub-directory used for the packs (eg. *arbiter/packs* for the Nagios legacy cfg files or *arbiter/backend-json* for the backend importable files).
+
+From Alignak packages repositories
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+More information in the online Alignak documentation. Here is only an abstract...
+
+Debian::
+
+    # Alignak DEB stable packages
+    sudo echo deb https://dl.bintray.com/alignak/alignak-deb-stable xenial main | sudo tee -a /etc/apt/sources.list.d/alignak.list
+    sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv D401AB61
+
+    sudo apt-get update
+    sudo apt install python-alignak-checks-nrpe
+
+CentOS::
+
+    sudo vi /etc/yum.repos.d/alignak-stable.repo:
+       [Alignak-rpm-stable]
+       name=Alignak RPM stable packages
+       baseurl=https://dl.bintray.com/alignak/alignak-rpm-stable
+       gpgcheck=0
+       repo_gpgcheck=0
+       enabled=1
+
+    sudo yum repolist
+
+    sudo yum install python-alignak-checks-nrpe
+
+.. note:: for Python 3 version, replace ``python`` with ``python3`` in the packages name.
 
 From PyPI
 ~~~~~~~~~
-To install the package from PyPI:
-::
+To install the package from PyPI::
 
-   sudo pip install alignak-checks-nrpe
+    # Python 2
+    sudo pip install alignak-checks-nrpe
+
+    # Python 3
+    sudo pip3 install alignak-checks-nrpe
+
 
 
 From source files
 ~~~~~~~~~~~~~~~~~
-To install the package from the source files:
-::
+To install the package from the source files::
 
    git clone https://github.com/Alignak-monitoring-contrib/alignak-checks-nrpe
    cd alignak-checks-nrpe
@@ -52,8 +86,7 @@ Configuration
 
 This checks pack is using the `check_nrpe` Nagios plugin that must be installed on the Alignak server running your poller daemon.
 
-For Unix (FreeBSD), you can simply install the NRPE plugin:
-::
+For Unix (FreeBSD), you can simply install the NRPE plugin::
 
    # Simple NRPE
    pkg install nrpe
@@ -64,8 +97,7 @@ For Unix (FreeBSD), you can simply install the NRPE plugin:
    # Take care to copy/rename the check_nrpe2 to check_nrpe if needed! Else, replace the check_nrpe
    # command with check_nrpe2
 
-For Linux distros, install the Nagios ``check_nrpe`` plugin from your system repository:
-::
+For Linux distros, install the Nagios ``check_nrpe`` plugin from your system repository::
 
    # Install local NRPE plugin
    sudo apt-get install nagios-nrpe-plugin
@@ -76,7 +108,7 @@ After installation, the plugins are commonly installed in the */usr/local/libexe
 
 The */usr/local/etc/alignak/arbiter/packs/resource.d/nrpe.cfg* file defines a global macro
 that contains the NRPE check plugin installation path. You must edit this file to update the default path that is defined to the alignak ``$NAGIOSPLUGINSDIR$`` (defined in alignak default configuration).
-::
+ ::
 
     #-- NRPE check plugin installation directory
     # Default is to use the Alignak plugins directory
@@ -86,37 +118,12 @@ that contains the NRPE check plugin installation path. You must edit this file t
 **Note:** the default value for ``$NAGIOSPLUGINSDIR$`` is set as */usr/lib/nagios/plugins* which is the common installation directory used by the Nagios plugins.
 
 
-Prepare monitored hosts
-~~~~~~~~~~~~~~~~~~~~~~~
-
-Some operations are necessary on the monitored hosts if NRPE remote access is not yet activated.
-::
-   # Install local NRPE server
-   su -
-   apt-get update
-   apt-get install nagios-nrpe-server
-   apt-get install nagios-plugins
-
-   # Allow Alignak as a remote host
-   vi /etc/nagios/nrpe.cfg
-   =>
-      allowed_hosts = X.X.X.X
-
-   # Restart NRPE daemon
-   /etc/init.d/nagios-nrpe-server start
-
-Test remote access with the plugins files:
-::
-   /usr/local/var/libexec/alignak/check_nrpe -H 127.0.0.1 -t 9 -u -c check_load
-
-**Note**: This configuration is the default Nagios NRPE daemon configuration. As such it does not allow to define arguments in the NRPE commands and, as of it, the warning / critical threshold are defined on the server side.
-
-
 Prepare Unix/Linux monitored hosts
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Some operations are necessary on the monitored hosts if NRPE remote access is not yet activated.
-::
+ ::
+
    # Install local NRPE server
    su -
    apt-get update
@@ -132,7 +139,7 @@ Some operations are necessary on the monitored hosts if NRPE remote access is no
    /etc/init.d/nagios-nrpe-server start
 
 Test remote access with the plugins files:
-::
+ ::
 
    /usr/lib/nagios/plugins/check_nrpe -H 127.0.0.1 -t 9 -u -c check_load
 
@@ -146,7 +153,7 @@ Some operations are necessary on the Windows monitored hosts if NSClient++ is no
 
 Install and configure NSClient++ to allow remote NRPE checks. The example below is an NSClient Ini configuration file that allows to use the NRPE server.
 
-::
+ ::
 
     # -----------------------------------------------------------------------------
     # c:\Program Files\NSClient++\nsclient.ini
@@ -195,8 +202,7 @@ Install and configure NSClient++ to allow remote NRPE checks. The example below 
     insecure = true
     encoding = utf8
 
-Test remote access with the plugins files:
-::
+Test remote access with the plugins files::
 
    /usr/lib/nagios/plugins/check_nrpe -H 127.0.0.1 -t 9 -u -c check_load
 
@@ -206,7 +212,7 @@ Alignak configuration
 ~~~~~~~~~~~~~~~~~~~~~
 
 For a Linux monitored host, you simply have to tag the concerned host with the template ``linux-nrpe``.
-::
+ ::
 
     define host{
         use                     linux-nrpe
@@ -218,15 +224,13 @@ For a Linux monitored host, you simply have to tag the concerned host with the t
 
 
 For a Windows monitored host, you simply have to tag the concerned host with the template ``windows-nrpe``.
-::
+ ::
 
     define host{
         use                     windows-nrpe
         host_name               windows_nrpe
         address                 127.0.0.1
     }
-
-
 
 
 

@@ -42,18 +42,22 @@ case $i in
     shift
     ;;
     -b|--backend)
-    BACKEND="$i"
+    shift
+    BACKEND="$1"
     shift
     ;;
     -u|--username)
-    USERNAME="$i"
+    shift
+    USERNAME="$1"
     shift
     ;;
     -p|--password)
-    PASSWORD="$i"
+    shift
+    PASSWORD="$1"
     shift
     ;;
     -f|--files)
+    shift
     JSON_FILES="$i"
     shift
     ;;
@@ -62,42 +66,42 @@ done
 
 
 if [ "$VERBOSE_MODE" = "0" ]; then
-    ARGUMENTS="--quiet"
+    ARGUMENTS="--quiet -b $BACKEND -u $USERNAME -p $PASSWORD"
 else
-    ARGUMENTS="--verbose"
+    ARGUMENTS="--verbose -b $BACKEND -u $USERNAME -p $PASSWORD"
 fi
 
 # Add groups and templates
 echo "alignak-backend-cli $ARGUMENTS -f "$JSON_FILES" -t command -d commands.json add"
-/usr/local/bin/alignak-backend-cli $ARGUMENTS -f "$JSON_FILES" -t command -d commands.json add
+alignak-backend-cli $ARGUMENTS -f "$JSON_FILES" -t command -d commands.json add
 if [ $? -ne 0 ]; then
     echo "Failed to import file :("
     ERROR_FOUND=$((ERROR_FOUND + 1))
 fi
 
 echo "alignak-backend-cli $ARGUMENTS -f "$JSON_FILES" -t hostgroup -d hostgroups.json add"
-/usr/local/bin/alignak-backend-cli $ARGUMENTS -f "$JSON_FILES" -t hostgroup -d hostgroups.json add
+alignak-backend-cli $ARGUMENTS -f "$JSON_FILES" -t hostgroup -d hostgroups.json add
 if [ $? -ne 0 ]; then
     echo "Failed to import file :("
     ERROR_FOUND=$((ERROR_FOUND + 1))
 fi
 
 echo "alignak-backend-cli $ARGUMENTS -f "$JSON_FILES" -t servicegroup -d servicegroups.json add"
-/usr/local/bin/alignak-backend-cli $ARGUMENTS -f "$JSON_FILES" -t servicegroup -d servicegroups.json add
+alignak-backend-cli $ARGUMENTS -f "$JSON_FILES" -t servicegroup -d servicegroups.json add
 if [ $? -ne 0 ]; then
     echo "Failed to import file :("
     ERROR_FOUND=$((ERROR_FOUND + 1))
 fi
 
 echo "alignak-backend-cli $ARGUMENTS -f "$JSON_FILES" -t host -d hosts-templates.json add"
-/usr/local/bin/alignak-backend-cli $ARGUMENTS -f "$JSON_FILES" -t host -d hosts-templates.json add
+alignak-backend-cli $ARGUMENTS -f "$JSON_FILES" -t host -d hosts-templates.json add
 if [ $? -ne 0 ]; then
     echo "Failed to import file :("
     ERROR_FOUND=$((ERROR_FOUND + 1))
 fi
 
 echo "alignak-backend-cli $ARGUMENTS -f "$JSON_FILES" -t service -d services-templates.json add"
-/usr/local/bin/alignak-backend-cli $ARGUMENTS -f "$JSON_FILES" -t service -d services-templates.json add
+alignak-backend-cli $ARGUMENTS -f "$JSON_FILES" -t service -d services-templates.json add
 if [ $? -ne 0 ]; then
     echo "Failed to import file :("
     ERROR_FOUND=$((ERROR_FOUND + 1))

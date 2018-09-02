@@ -1,0 +1,62 @@
+language: python
+sudo: true
+python:
+  - "2.7"
+
+install:
+  - sudo apt-get install -y rpm
+
+script:
+  - pip freeze  # so to help eventual debug: know what exact versions are in use can be rather useful.
+
+after_success:
+  - echo "Packaging for BinTray - Debian..."
+  - ./package.sh $TRAVIS_BRANCH $TRAVIS_PYTHON_VERSION deb
+  - echo "Packaging for BinTray - RPM..."
+  - ./package.sh $TRAVIS_BRANCH $TRAVIS_PYTHON_VERSION rpm
+
+deploy:
+  # PyPi deployment for tagged commits:
+  # -> build a PyPi package when a version is set
+  # Bintray deployment for develop branch and tagged commits:
+  # -> build Deb/Rpm packages on develop branch or when a version is set
+  - provider: pypi
+    distributions: "sdist bdist_wheel"
+    skip_existing: true
+    on:
+      tags: true
+    user: alignak
+    password:
+      secure: "qKfj6ZfS3kqqlRxglwyDEz1VWhh/+UyljOvWvv+aOWkBF7XAXwCwNAewp16NPJaMx89qMRevuDaUiiviS7uJT1rfLyytGAo5pZDyTsKHiaKVOOYLp6Vq8gQWGXkrMNye+utusNY/t2Pt70HCJK6zWlJ25x2oLlaeDq2HtY3hV8lNIX3gHf/b+/htkVDV7GL/cf0X/SRExGcbMKwuz570NigUqHh9uqvOU3SUxW9Qcvlj82J8e0cNIAk4NO0zP53JR0opjnFJMRHVC2rNOBtRkQHxGxxYbfmpHdZH0sPSOY1bO/IpK0xDa2QTNHfRUotp49UtDF/mRdbrcE9Ah+w1qtVhV9V/xpwN1IeNXAdLooXiM4ntCetEltLGAPqQfPqUC+cuoJVh/eDOjn5oM6GDenM1kMDD+KGk3k3kU/npd5bpUYygsl/mfFG/R6TOJafjupR6b/WKzKJ6C2JBQZJsiLis5XR4b4NTj6HQPauYPtDHXetVD6qooeV/X2aAsfROKkfAkVDIO7/DQ4HAw7rC/cvBq2bXPgNU/3Jwv5gxz5b8p/AFe0qm7WssHtnp5iNaqWBk8JDXl9fGnFPksqJcRdUbtJncMqPGmsE48WxQPxVLasTFs/1vUIhpcLfd3Wyos7AJ86sPFGZrzVrAKVQxXvMOdG5AY+7ZIXfeAck8OVs="
+  - provider: bintray
+    skip_cleanup: true
+    file: dist/.bintray-deb.json
+    user: mohierf
+    key:
+      secure: "pt6m2E0ffC5JvnvpqVgTpHt3s3j07BvBzyHzVdOW6f8sAoZEzzs1RjrhiUL4GNWJDX+Iy1uSQJ4l8QJ9zkiO3+V0g5LTr/gSW15Xu8YgTy37mBCcvLILljoWkZK8l9nbZFxKXO4N2iw0l20gNzq6FQ2oW+ZnOj2yAwfHfrcX1HjdwWNOoZ/KpVqzKO3hUxzgfWkopMm/6knEPfk/HOBaLz8KOqEclCI743aj7meq2YeKDbYpCCi6I06adJQG83Z7x2SKb9GY1AnIUmLcJ6ixpePAGb5DpfY7pZozjobsgk8XmJFnVXLbnrIUiTG7th5bOC7GwCSaXylIOJlwpZRLti8wdFZv3VvaDgXbxt3cvB8s+xuquI43uhFgU4EMRicbl7FhOLgOfkk1mJXxiUsEtJXpKu1w41sL+JR4AHLWnshcSC7unLc0NpHfsg5yUF+MGmN379V62uuGU8EQ4uoERtYyP2DJHGjy1cwA5X8WtonCc5S2IuDJGh83ZY8e2LEIhZnWXcg7Api1aXd6uPMi51vqzrxTBdcaEp5+gjOjcYVLzAC0FQmR2/P+1PaEdsoHhnp1q1xrJOaN9DYW7I/kzUb//IPsTwZ8bbOLQ56c8LXu5NaFrdUF604C3V8rG0ofC3btxhjej+y7dF6XKlkkYrt/VgpvsLQu97ievVAGhqw="
+    on:
+      branch: develop
+  - provider: bintray
+    skip_cleanup: true
+    file: dist/.bintray-deb.json
+    user: mohierf
+    key:
+      secure: "pt6m2E0ffC5JvnvpqVgTpHt3s3j07BvBzyHzVdOW6f8sAoZEzzs1RjrhiUL4GNWJDX+Iy1uSQJ4l8QJ9zkiO3+V0g5LTr/gSW15Xu8YgTy37mBCcvLILljoWkZK8l9nbZFxKXO4N2iw0l20gNzq6FQ2oW+ZnOj2yAwfHfrcX1HjdwWNOoZ/KpVqzKO3hUxzgfWkopMm/6knEPfk/HOBaLz8KOqEclCI743aj7meq2YeKDbYpCCi6I06adJQG83Z7x2SKb9GY1AnIUmLcJ6ixpePAGb5DpfY7pZozjobsgk8XmJFnVXLbnrIUiTG7th5bOC7GwCSaXylIOJlwpZRLti8wdFZv3VvaDgXbxt3cvB8s+xuquI43uhFgU4EMRicbl7FhOLgOfkk1mJXxiUsEtJXpKu1w41sL+JR4AHLWnshcSC7unLc0NpHfsg5yUF+MGmN379V62uuGU8EQ4uoERtYyP2DJHGjy1cwA5X8WtonCc5S2IuDJGh83ZY8e2LEIhZnWXcg7Api1aXd6uPMi51vqzrxTBdcaEp5+gjOjcYVLzAC0FQmR2/P+1PaEdsoHhnp1q1xrJOaN9DYW7I/kzUb//IPsTwZ8bbOLQ56c8LXu5NaFrdUF604C3V8rG0ofC3btxhjej+y7dF6XKlkkYrt/VgpvsLQu97ievVAGhqw="
+    on:
+      tags: true
+  - provider: bintray
+    skip_cleanup: true
+    file: dist/.bintray-rpm.json
+    user: mohierf
+    key:
+      secure: "pt6m2E0ffC5JvnvpqVgTpHt3s3j07BvBzyHzVdOW6f8sAoZEzzs1RjrhiUL4GNWJDX+Iy1uSQJ4l8QJ9zkiO3+V0g5LTr/gSW15Xu8YgTy37mBCcvLILljoWkZK8l9nbZFxKXO4N2iw0l20gNzq6FQ2oW+ZnOj2yAwfHfrcX1HjdwWNOoZ/KpVqzKO3hUxzgfWkopMm/6knEPfk/HOBaLz8KOqEclCI743aj7meq2YeKDbYpCCi6I06adJQG83Z7x2SKb9GY1AnIUmLcJ6ixpePAGb5DpfY7pZozjobsgk8XmJFnVXLbnrIUiTG7th5bOC7GwCSaXylIOJlwpZRLti8wdFZv3VvaDgXbxt3cvB8s+xuquI43uhFgU4EMRicbl7FhOLgOfkk1mJXxiUsEtJXpKu1w41sL+JR4AHLWnshcSC7unLc0NpHfsg5yUF+MGmN379V62uuGU8EQ4uoERtYyP2DJHGjy1cwA5X8WtonCc5S2IuDJGh83ZY8e2LEIhZnWXcg7Api1aXd6uPMi51vqzrxTBdcaEp5+gjOjcYVLzAC0FQmR2/P+1PaEdsoHhnp1q1xrJOaN9DYW7I/kzUb//IPsTwZ8bbOLQ56c8LXu5NaFrdUF604C3V8rG0ofC3btxhjej+y7dF6XKlkkYrt/VgpvsLQu97ievVAGhqw="
+    on:
+      branch: develop
+  - provider: bintray
+    skip_cleanup: true
+    file: dist/.bintray-rpm.json
+    user: mohierf
+    key:
+      secure: "pt6m2E0ffC5JvnvpqVgTpHt3s3j07BvBzyHzVdOW6f8sAoZEzzs1RjrhiUL4GNWJDX+Iy1uSQJ4l8QJ9zkiO3+V0g5LTr/gSW15Xu8YgTy37mBCcvLILljoWkZK8l9nbZFxKXO4N2iw0l20gNzq6FQ2oW+ZnOj2yAwfHfrcX1HjdwWNOoZ/KpVqzKO3hUxzgfWkopMm/6knEPfk/HOBaLz8KOqEclCI743aj7meq2YeKDbYpCCi6I06adJQG83Z7x2SKb9GY1AnIUmLcJ6ixpePAGb5DpfY7pZozjobsgk8XmJFnVXLbnrIUiTG7th5bOC7GwCSaXylIOJlwpZRLti8wdFZv3VvaDgXbxt3cvB8s+xuquI43uhFgU4EMRicbl7FhOLgOfkk1mJXxiUsEtJXpKu1w41sL+JR4AHLWnshcSC7unLc0NpHfsg5yUF+MGmN379V62uuGU8EQ4uoERtYyP2DJHGjy1cwA5X8WtonCc5S2IuDJGh83ZY8e2LEIhZnWXcg7Api1aXd6uPMi51vqzrxTBdcaEp5+gjOjcYVLzAC0FQmR2/P+1PaEdsoHhnp1q1xrJOaN9DYW7I/kzUb//IPsTwZ8bbOLQ56c8LXu5NaFrdUF604C3V8rG0ofC3btxhjej+y7dF6XKlkkYrt/VgpvsLQu97ievVAGhqw="
+    on:
+      tags: true
